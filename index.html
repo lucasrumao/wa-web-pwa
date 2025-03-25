@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WA Web</title>
+    <link rel="manifest" href="manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js');
+        }
+        window.location.href = "https://web.whatsapp.com"; // Redireciona automaticamente
+    </script>
+</head>
+<body>
+    <p>Redirecionando para o WhatsApp Web...</p>
+</body>
+</html>
