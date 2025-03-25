@@ -9,10 +9,25 @@
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js');
         }
-        window.location.href = "https://web.whatsapp.com"; // Redireciona automaticamente
+
+        // Abre o WhatsApp Web com um User-Agent falso de PC
+        function abrirWhatsAppWeb() {
+            var url = "https://web.whatsapp.com";
+            var win = window.open(url, "_self");
+            
+            // Apenas funciona em alguns navegadores
+            if (win) {
+                win.navigator.__defineGetter__('userAgent', function(){
+                    return "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36";
+                });
+            }
+        }
+
+        abrirWhatsAppWeb();
     </script>
 </head>
 <body>
     <p>Redirecionando para o WhatsApp Web...</p>
 </body>
 </html>
+
