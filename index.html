@@ -5,23 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WA Web</title>
     <link rel="manifest" href="manifest.json">
+    <style>
+        /* Deixa o app em tela cheia no iPhone */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Esconde a barra superior do WhatsApp Web */
+        header, ._3Jxt3, ._2TSll, .ldL67 { 
+            display: none !important;
+        }
+
+        /* Centraliza as conversas na tela */
+        ._3BqO4 {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Ícones inferiores (Conversas, Status, Comunidades, Chamadas) */
+        .custom-navbar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #ddd;
+        }
+
+        .custom-navbar img {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* Tela da conversa aberta (oculta a lista de chats) */
+        ._2Ts6i {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: white;
+            z-index: 1000;
+        }
+
+        /* Botão de voltar na tela de conversa */
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js');
         }
-
-        // Verifica se o navegador é Safari no iPhone
-        var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
-        if (isSafari) {
-            alert("⚠️ No Safari, ative a 'Versão para Computador' manualmente!"); 
-        }
-
-        // Redireciona para WhatsApp Web forçando desktop
-        window.location.href = "https://web.whatsapp.com/?ua=Mozilla/5.0%20(Windows%20NT%2010.0;%20Win64;%20x64)";
     </script>
 </head>
 <body>
-    <p>Redirecionando para o WhatsApp Web...</p>
+
+    <!-- Redireciona para o WhatsApp Web -->
+    <iframe src="https://web.whatsapp.com" width="100%" height="100%" style="border:none;"></iframe>
+
+    <!-- Barra inferior de navegação -->
+    <div class="custom-navbar">
+        <img src="chat-icon.png" alt="Conversas">
+        <img src="status-icon.png" alt="Status">
+        <img src="channels-icon.png" alt="Canais">
+        <img src="calls-icon.png" alt="Chamadas">
+    </div>
+
 </body>
 </html>
