@@ -4,53 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WA Web App</title>
-    <link rel="manifest" href="manifest.json">
-    <style>
-        /* Estilos gerais */
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            overflow: hidden;
-            background-color: #111;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Ajuste para o iPhone */
-        iframe {
-            width: 100vw;
-            height: 100vh;
-            border: none;
-        }
-
-        /* Barra de navegação inferior */
-        .navbar {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            height: 60px;
-            background: #202020;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            border-top: 1px solid #333;
-        }
-
-        .navbar img {
-            width: 28px;
-            height: 28px;
-            filter: invert(1);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css"> <!-- Importa o CSS externo -->
 </head>
 <body>
 
-    <!-- Força o WhatsApp Web a abrir em modo Desktop -->
-    <iframe id="whatsappFrame" src="https://web.whatsapp.com/" allow="clipboard-read; clipboard-write"></iframe>
+    <!-- Mensagem para carregar o WhatsApp -->
+    <div class="container">
+        <h1>Abrindo WhatsApp Web...</h1>
+        <button onclick="openWhatsApp()">Abrir Manualmente</button>
+    </div>
 
-    <!-- Barra inferior de navegação personalizada -->
+    <!-- Barra inferior de navegação -->
     <div class="navbar">
         <img src="chat.png" alt="Conversas">
         <img src="status.png" alt="Status">
@@ -58,5 +22,6 @@
         <img src="calls.png" alt="Chamadas">
     </div>
 
+    <script src="script.js"></script> <!-- Importa o JavaScript externo -->
 </body>
 </html>
