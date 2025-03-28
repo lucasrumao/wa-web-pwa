@@ -1,32 +1,62 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WA Web</title>
+    <title>WA Web App</title>
     <link rel="manifest" href="manifest.json">
-    <script>
-        // Redireciona para o WhatsApp Web
-        window.location.href = "https://web.whatsapp.com";
-    </script>
     <style>
-        /* Estilos opcionais para melhorar a experiência */
-        body {
+        /* Estilos gerais */
+        body, html {
             margin: 0;
             padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #111;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #f0f0f0;
         }
-        p {
-            font-family: Arial, sans-serif;
-            color: #333;
+
+        /* Ajuste para o iPhone */
+        iframe {
+            width: 100vw;
+            height: 100vh;
+            border: none;
+        }
+
+        /* Barra de navegação inferior */
+        .navbar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 60px;
+            background: #202020;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #333;
+        }
+
+        .navbar img {
+            width: 28px;
+            height: 28px;
+            filter: invert(1);
         }
     </style>
 </head>
 <body>
-    <p>Redirecionando para o WhatsApp Web...</p>
+
+    <!-- Força o WhatsApp Web a abrir em modo Desktop -->
+    <iframe id="whatsappFrame" src="https://web.whatsapp.com/" allow="clipboard-read; clipboard-write"></iframe>
+
+    <!-- Barra inferior de navegação personalizada -->
+    <div class="navbar">
+        <img src="chat.png" alt="Conversas">
+        <img src="status.png" alt="Status">
+        <img src="channels.png" alt="Canais">
+        <img src="calls.png" alt="Chamadas">
+    </div>
+
 </body>
 </html>
