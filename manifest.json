@@ -1,16 +1,20 @@
 {
-    "name": "WA Web",
-    "short_name": "WA Web",
-    "start_url": "https://web.whatsapp.com",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#075e54",
-    "icons": [
-      {
-        "src": "icon.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      }
-    ]
-  }
-  
+  "name": "WA Web",
+  "short_name": "WA Web",
+  "start_url": "https://web.whatsapp.com",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#075e54",
+  "icons": [
+    {
+      "src": "icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
