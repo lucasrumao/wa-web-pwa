@@ -1,5 +1,5 @@
 // Verificação robusta de iOS
-const isIOS = () => {
+const isIOS = () => true; { // Força reconhecer como iOS
   return (
     /iPad|iPhone|iPod/.test(navigator.userAgent) ||
     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) // iPadOS
