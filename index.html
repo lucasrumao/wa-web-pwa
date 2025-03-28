@@ -2,36 +2,47 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <!-- Meta tags críticas para o iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>WhatsApp Mobile</title>
     <style>
+        /* Reset de estilos para remover margens */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background: #0b141a; overflow: hidden; }
-        iframe { width: 100%; height: 100vh; border: none; }
+        #wa-frame { 
+            width: 100%;
+            height: 100vh;
+            border: none;
+            transform: scale(0.85); /* Ajuste de zoom para mobile */
+            transform-origin: top left;
+        }
     </style>
 </head>
 <body>
-    <div id="wa-container"></div>
+    <iframe id="wa-frame"></iframe>
 
     <script>
-        // 1. Verifica se é um dispositivo iOS
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        // Passo 1: Detecção infalível de iOS
+        const isIOS = () => {
+            const platforms = ['iPad', 'iPhone', 'iPod'];
+            return platforms.some(platform => navigator.userAgent.includes(platform));
+        };
 
-        // 2. Cria o iframe se for iOS
-        if (isIOS) {
-            const iframe = document.createElement('iframe');
-            iframe.src = 'https://web.whatsapp.com';
-            
-            // Força User Agent desktop (Chrome no Windows)
+        // Passo 2: Forçar User Agent desktop
+        if (isIOS()) {
             Object.defineProperty(navigator, 'userAgent', {
                 value: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
-                configurable: false,
-                writable: false
+                configurable: false
             });
 
-            document.getElementById('wa-container').appendChild(iframe);
+            // Passo 3: Carregar o WhatsApp Web após 1s (para o User Agent aplicar)
+            setTimeout(() => {
+                document.getElementById('wa-frame').src = 'https://web.whatsapp.com';
+            }, 1000);
         } else {
-            document.body.innerHTML = '<p style="color:white; padding:20px;">⚠️ Abra este link no iPhone!</p>';
+            document.body.innerHTML = '<p style="color:white; padding:20px; font-family:Arial">⚠️ Use um iPhone!</p>';
         }
     </script>
 </body>
