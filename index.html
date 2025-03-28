@@ -1,27 +1,50 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WA Web App</title>
-    <link rel="stylesheet" href="style.css"> <!-- Importa o CSS externo -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WhatsApp Mobile</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Ícone para a tela inicial (opcional) -->
+    <link rel="apple-touch-icon" href="icon.png">
 </head>
 <body>
+    <!-- Container do WhatsApp Web -->
+    <div id="wa-container"></div>
 
-    <!-- Mensagem para carregar o WhatsApp -->
-    <div class="container">
-        <h1>Abrindo WhatsApp Web...</h1>
-        <button onclick="openWhatsApp()">Abrir Manualmente</button>
-    </div>
+    <script>
+        // Força o User Agent mobile e injeta o WhatsApp Web
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        const waContainer = document.getElementById('wa-container');
 
-    <!-- Barra inferior de navegação -->
-    <div class="navbar">
-        <img src="chat.png" alt="Conversas">
-        <img src="status.png" alt="Status">
-        <img src="channels.png" alt="Canais">
-        <img src="calls.png" alt="Chamadas">
-    </div>
+        if (isMobile) {
+            // Cria um iframe com User Agent de desktop (para burlar o bloqueio)
+            const iframe = document.createElement('iframe');
+            iframe.src = 'https://web.whatsapp.com';
+            iframe.style.width = '100%';
+            iframe.style.height = '100vh';
+            iframe.style.border = 'none';
+            waContainer.appendChild(iframe);
+        } else {
+            waContainer.innerHTML = '<p>Abra este link no seu iPhone!</p>';
+        }
 
-    <script src="script.js"></script> <!-- Importa o JavaScript externo -->
+        // Remove elementos do WhatsApp Web via JavaScript (após carregar)
+        iframe.onload = () => {
+            try {
+                // Acessa o DOM do iframe para modificar estilos
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                
+                // Esconde a barra lateral (desktop)
+                iframeDoc.querySelector('div[data-testid="chat-list"]').style.width = '100%';
+                iframeDoc.querySelector('div[data-testid="sidebar"]').style.display = 'none';
+                
+                // Ajusta o zoom para 80% (simula mobile)
+                iframeDoc.body.style.zoom = '0.8';
+            } catch (error) {
+                console.log('Não foi possível modificar o DOM:', error);
+            }
+        };
+    </script>
 </body>
 </html>
